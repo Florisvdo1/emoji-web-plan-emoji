@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Emoji Dagplanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Include Darumadrop One Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+  <!-- Link to Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/icon-192x192.png">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+  <!-- Meta Tags for PWA -->
+  <meta name="theme-color" content="#87CEEB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+</head>
+<body>
+  <!-- Background Container for Cloud Animation -->
+  <div class="background-container">
+    <!-- Cloud Rows -->
+    <div class="cloud-row">
+      <img src="images/cloud.svg" alt="Wolk" class="cloud cloud-1">
+      <img src="images/cloud.svg" alt="Wolk" class="cloud cloud-2">
+      <img src="images/cloud.svg" alt="Wolk" class="cloud cloud-3">
+    </div>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div id="header-container">
+      <!-- Left Side: Live Time -->
+      <div class="header-left">
+        <span id="live-time">--:--:--</span>
+      </div>
+      <!-- Center: Logo -->
+      <div class="header-center">
+        <img src="images/logo.svg" alt="Emoji Dagplanner Logo" class="logo" id="header-logo">
+      </div>
+      <!-- Right Side: Reset Button -->
+      <div class="header-right">
+        <div class="icon-container">
+          <button id="reset-button" class="icon-button" aria-label="Reset Planner">
+            <img src="images/reset-icon.svg" alt="Reset Icon">
+            <span class="reset-label">Reset Planner</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Sectors Container -->
+    <div class="sectors-container">
+      <!-- Ochtend Sector -->
+      <div class="sector" id="ochtend-sector">
+        <div class="sector-header">
+          <h2>Ochtend</h2>
+        </div>
+        <div class="placeholders" id="ochtend-placeholders">
+          <div class="placeholder-container">
+            <div class="emoji-placeholder" data-time="ochtend" data-empty="true"></div>
+            <button class="add-placeholder-button" aria-label="Voeg placeholder toe"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middag Sector -->
+      <div class="sector" id="middag-sector">
+        <div class="sector-header">
+          <h2>Middag</h2>
+        </div>
+        <div class="placeholders" id="middag-placeholders">
+          <div class="placeholder-container">
+            <div class="emoji-placeholder" data-time="middag" data-empty="true"></div>
+            <button class="add-placeholder-button" aria-label="Voeg placeholder toe"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avond Sector -->
+      <div class="sector" id="avond-sector">
+        <div class="sector-header">
+          <h2>Avond</h2>
+        </div>
+        <div class="placeholders" id="avond-placeholders">
+          <div class="placeholder-container">
+            <div class="emoji-placeholder" data-time="avond" data-empty="true"></div>
+            <button class="add-placeholder-button" aria-label="Voeg placeholder toe"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Huiswerk Button Section -->
+    <div class="huiswerk-section">
+      <p>Huiswerk gedaan? Vink 'm af</p>
+      <button class="huiswerk-button" aria-label="Huiswerk Button">
+        <span class="huiswerk-text">Huiswerk</span>
+        <span class="huiswerk-check">✔️</span>
+      </button>
+    </div>
+
+    <!-- Day Rating System -->
+    <div class="day-rating">
+      <p>Geef je dag een emoji:</p>
+      <div class="rating-buttons" id="rating-buttons">
+        <button class="rating-button" data-rating="1" aria-label="Beoordeel 1">😱</button>
+        <button class="rating-button" data-rating="2" aria-label="Beoordeel 2">😕</button>
+        <button class="rating-button" data-rating="3" aria-label="Beoordeel 3">😐</button>
+        <button class="rating-button" data-rating="4" aria-label="Beoordeel 4">🙂</button>
+        <button class="rating-button" data-rating="5" aria-label="Beoordeel 5">😄</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Emoji Deck Section -->
+  <div id="emoji-deck" class="emoji-deck">
+    <div class="deck-body">
+      <!-- Navigation Buttons for Categories -->
+      <div class="navigation-buttons">
+        <button id="prev-category" class="nav-button" aria-label="Vorige categorie">◀️</button>
+        <span id="category-name">Activiteiten</span>
+        <button id="next-category" class="nav-button" aria-label="Volgende categorie">▶️</button>
+      </div>
+      <!-- Emoji Search Bar -->
+      <div class="emoji-search-bar">
+        <input type="text" id="emoji-search-input" placeholder="Zoek naar emojis...">
+      </div>
+      <!-- Emoji Grid -->
+      <div id="emoji-grid" class="emoji-grid"></div>
+    </div>
+  </div>
+
+  <!-- Link to the JavaScript file -->
+  <script src="script.js"></script>
+  <!-- Register Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+        console.log('Service Worker geregistreerd met scope:', registration.scope);
+      }).catch(function(error) {
+        console.log('Service Worker registratie mislukt:', error);
+      });
+    }
+  </script>
+</body>
+</html>
